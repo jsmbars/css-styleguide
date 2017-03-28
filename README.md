@@ -1,28 +1,28 @@
 # Boss Sass / Css Styleguide
 
 ## Table of Contents
-1. [General](#general)
+* [General](#general)
   - [Formatting](#formatting)
   - [Comments](#comments)
   - [BEM naming](#bem-naming)
   - [ID Selectors](#id-selectors)
   - [JavaScript hooks](#javascript-hooks)
-2. [Resets](#resets)
-3. [Sass](#sass)
+* [Resets](#resets)
+* [Sass](#sass)
   - [Folder structure](#folder-structure)
     + [Index file](#index-file)
     + [Blocks](#blocks)
     + [Helpers](#helpers)
     + [Vendor libs](#vendor-libs)
   - [Block structure](#block-structure)
-4. [Helpful Links](#helpful-links)
+* [Helpful Links](#helpful-links)
 
 
 ## General
 
 ### Formatting
 
-### Comment
+### Comments
 
 ### BEM naming
 
