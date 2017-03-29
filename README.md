@@ -134,10 +134,11 @@ See [FAQ](https://en.bem.info/methodology/faq/) for more usage examples.
 <div class="menu">...</div>
 ```
 
-*CSS*
+*Sass*
 
-```css
-.menu { color: red; }
+```sass
+.menu 
+  color: red
 ```
 
 
@@ -164,10 +165,11 @@ If a block has several identical elements, such as in the case of menu items, al
 <div class="menu"> ... <span class="menu__item"></span> </div>
 ```
 
-*CSS*
+*Sass*
 
-```css
-.menu__item { color: red; }
+```sass
+.menu__item
+  color: red
 ```
 
 
@@ -201,11 +203,14 @@ The value of a modifier is separated from its name by a single underscore (`_`).
 >
 > Here the notation is missing the block that is affected by the modifier.
 
-*CSS*
+*Sass*
 
-```css
-.menu_state_hidden { display: none }
-.menu_theme_morning-forest { color: green; }
+```sass
+.menu_state_hidden
+  display: none
+
+.menu_theme_morning-forest
+  color: green
 ```
 
 **Element modifier**.
@@ -222,10 +227,11 @@ The value of a modifier is separated from its name by a single underscore (`_`).
 <div class="menu"> ... <span class="menu__item menu__item_state_visible menu__item_type_radio"></span> </div>
 ```
 
-*CSS*
+*Sass*
 
-``` css
-.menu__item_type_radio { color: blue; }
+```sass
+.menu__item_type_radio
+  color: blue
 ```
 
 
@@ -240,17 +246,6 @@ The implementation of an authorization form in HTML and CSS:
     <input class="form__input">
     <input class="form__submit form__submit_state_disabled">
 </form>
-```
-
-*CSS*
-
-```css
-.form {}
-.form_theme_forest {}
-.form_login {}
-.form__input {}
-.form__submit {}
-.form__submit_state_disabled {}
 ```
 
 *Sass*
@@ -313,7 +308,7 @@ On the refactoring stage these mixins will be removed in favor of `reset` styles
 sass/                             * sass preprocessor styles
    ├── blocks/                    * blocks library
    |   └── block-name.sass
-   ├── helpers/                   * mixins, variables, base, fonts
+   ├── helpers/                   * mixins, settings, base, fonts
    ├── vendor/                    * third-party code
    └── index.sass                 * index file
 ```
@@ -322,17 +317,19 @@ Related: [Architecture for a Sass Project](http://www.sitepoint.com/architecture
 
 #### Index file
 
-Contain only imports of vendor code, helpers and blocks. Any code should be placed in the appropriate file.
+Contain only imports of vendor code, helpers and blocks. Place your Sass code in the appropriate file.
 
 
 #### Blocks
 
-`blocks` folder contain page components. Each block should be placed into separate files. One block - one file.
+`blocks` folder contain page components. Each block should be placed into separate files. Elements should be nested within block's class name using `&`.
+
+**Important** Ruby-sass compiler requires direct import of `mixins.sass` and `settings.sass` into each block.
 
 
 #### Helpers
 
-`Helpers` folder includes `mixins.sass`, `variables.sass`, `fonts.sass` and `base.sass` files.
+`Helpers` folder includes `mixins.sass`, `settings.sass`, `fonts.sass` and `base.sass` files.
 
 `misins.sass` - contains common mixins, i.e clearfix trick
 Mixins should be used to DRY up your code, add clarity, or abstract complexity--in much the same way as well-named functions. Mixins that accept no arguments can be useful for this, but note that if you are not compressing your payload (e.g. gzip), this may contribute to unnecessary code duplication in the resulting styles.
@@ -342,6 +339,8 @@ Use shorthand to declare `=mixin-name()` and include `+mixin-name()` mixin.
 Block-related mixins, like `button-hover-behavior()` should be placed into block file.
 
 `@extend` should be avoided because it has unintuitive and potentially dangerous behavior, especially when used with nested selectors. Even extending top-level placeholder selectors can cause problems if the order of selectors ends up changing later (e.g. if they are in other files and the order the files are loaded shifts). Gzipping should handle most of the savings you would have gained by using `@extend`, and you can DRY up your stylesheets nicely with mixins.
+
+`settings.sass` - contains common variables, like color maps, fonts etc
 
 `base.sass` contains common styles, like selection styles, `html` and `body` styles, headings defaults.
 
