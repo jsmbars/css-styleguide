@@ -11,8 +11,8 @@
       + [Example of using the naming convention](#example-of-using-the-naming-convention)
   - [ID Selectors](#id-selectors)
   - [JavaScript hooks](#javascript-hooks)
-* [Resets](#resets)
-* [Sass](#sass)
+* [Project](#project)
+  - [Resets](#resets)
   - [Folder structure](#folder-structure)
     + [Index file](#index-file)
     + [Blocks](#blocks)
@@ -286,7 +286,9 @@ We recommend creating JavaScript-specific classes to bind to, prefixed with `.js
 ```
 
 
-## Resets
+## Project
+
+### Resets
 
 Some project pages use Foundation framework, so for now we can't use general `reset` or `normalize` stylesheet. 
 For this purpose we have a few rough `sass` mixins that should be added to each block and some block's elements:
@@ -303,9 +305,6 @@ For this purpose we have a few rough `sass` mixins that should be added to each 
 ```
 
 On the refactoring stage these mixins will be removed in favor of `reset` stylesheet
-
-
-## Sass
 
 
 ### Folder structure
