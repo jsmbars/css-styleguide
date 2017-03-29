@@ -107,7 +107,15 @@ We use BEM for these reasons:
 
 * Names of BEM entities are written using **numbers** and **lowercase** **Latin characters**.
 * Individual words within names are separated by a **hyphen** (`-`).
+* Element name is delimited by a double underscore (`__`) from a block name.
+* Modifier is separated from its name by a single underscore (`_`).
 * Information about the names of blocks, elements, and modifiers is stored using **CSS classes**.
+* Avoid nested selectors, like `.block-name h2 {}` or `.block-name__elem-name p {}`. Nested selectors increase code coupling and make reuse impossible. This is in contradiction to the BEM principles. In this case use `.block-name__title {}` element instead.
+
+**Exception:** nesting is appropriate if you need to change elements relative to the state of the block or the theme set: `.nav_theme_islands .nav__item {}`
+* Avoid combined tags and class names. Combining a tag and a class in a selector makes the CSS rules more specific.
+
+See [FAQ](https://en.bem.info/methodology/faq/) for more usage examples.
 
 
 #### Block
@@ -165,7 +173,10 @@ If a block has several identical elements, such as in the case of menu items, al
 
 #### Modifier
 
-On the current project most of modifiers are **Key-value type modifier**.
+On the current project most of modifiers are **Key-value type modifier**, like `block-name_mod-name_mod-val` or `block-name__elem-name_mod-name_mod-val`
+
+**Important!** Modifier can be added only to its own block or element.
+Mixes like this `block-name other-block_mod-name_mod-val` are not allowed. In this case use `block-name_mod-name` or wrap instead.
 
 **Block modifier**
 The value of a modifier is separated from its name by a single underscore (`_`). The full name is created using the scheme:
@@ -296,6 +307,7 @@ On the refactoring stage these mixins will be removed in favor of `reset` styles
 
 ## Sass
 
+
 ### Folder structure
 
 ```
@@ -309,11 +321,28 @@ sass/                             * sass preprocessor styles
 
 #### Index file
 
+
 #### Blocks
+
+Each block should be placed into separate files. One block - one file.
+
 
 #### Helpers
 
+`misins.sass` - contains common mixins, i.e clearfix trick
+Mixins should be used to DRY up your code, add clarity, or abstract complexity--in much the same way as well-named functions. Mixins that accept no arguments can be useful for this, but note that if you are not compressing your payload (e.g. gzip), this may contribute to unnecessary code duplication in the resulting styles.
+
+Block-related mixins, like `button-hover-behavior()` should be placed into block file.
+
+`Helpers` folder includes `mixins.sass`, `variables.sass`, `fonts.sass` and `base.sass` files.
+
+`base.sass` contain common styles, like selection styles, `html` and `body` styles, headings defaults.
+
+
 #### Vendor libs
+Third-party libs, like frameworks, plugins styles etc.
+**Important** Vendor code should not be changed. Use override within blocks instead.
+
 
 ### Block structure
 
@@ -341,7 +370,7 @@ $block: ".block-name"
 #{$block}
   // ...
 
-  +mixin-name()
+  +block-mixin-name()
 
   // Media queries
   @media screen and (max-width: 960px)
@@ -379,7 +408,7 @@ $block: ".block-name"
   &__element
     // ...
 
-    +mixin-name()
+    +block-mixin-name()
 
     // Block element name CONTEXT: block-name STATE: active state
     #{$block}_state_active &
