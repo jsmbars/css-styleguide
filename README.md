@@ -337,7 +337,11 @@ Contain only imports of vendor code, helpers and blocks. Any code should be plac
 `misins.sass` - contains common mixins, i.e clearfix trick
 Mixins should be used to DRY up your code, add clarity, or abstract complexity--in much the same way as well-named functions. Mixins that accept no arguments can be useful for this, but note that if you are not compressing your payload (e.g. gzip), this may contribute to unnecessary code duplication in the resulting styles.
 
+Use shorthand to declare `=mixin-name()` and include `+mixin-name()` mixin.
+
 Block-related mixins, like `button-hover-behavior()` should be placed into block file.
+
+`@extend` should be avoided because it has unintuitive and potentially dangerous behavior, especially when used with nested selectors. Even extending top-level placeholder selectors can cause problems if the order of selectors ends up changing later (e.g. if they are in other files and the order the files are loaded shifts). Gzipping should handle most of the savings you would have gained by using `@extend`, and you can DRY up your stylesheets nicely with mixins.
 
 `base.sass` contains common styles, like selection styles, `html` and `body` styles, headings defaults.
 
