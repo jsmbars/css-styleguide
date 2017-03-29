@@ -118,7 +118,7 @@ We use BEM for these reasons:
 See [FAQ](https://en.bem.info/methodology/faq/) for more usage examples.
 
 
-#### Block
+### Block
 
 `block-name` - defines a namespace for elements and modifiers.
 
@@ -171,7 +171,7 @@ If a block has several identical elements, such as in the case of menu items, al
 ```
 
 
-#### Modifier
+### Modifier
 
 On the current project most of modifiers are **Key-value type modifier**, like `block-name_mod-name_mod-val` or `block-name__elem-name_mod-name_mod-val`
 
@@ -229,7 +229,7 @@ The value of a modifier is separated from its name by a single underscore (`_`).
 ```
 
 
-#### Example of using the naming convention
+### Example of using the naming convention
 
 The implementation of an authorization form in HTML and CSS:
 
@@ -316,27 +316,33 @@ sass/                             * sass preprocessor styles
    |   └── block-name.sass
    ├── helpers/                   * mixins, variables, base, fonts
    ├── vendor/                    * third-party code
+   └── index.sass                 * index file
 ```
 
+Related: [Architecture for a Sass Project](http://www.sitepoint.com/architecture-sass-project/)
 
 #### Index file
+
+Contain only imports of vendor code, helpers and blocks. Any code should be placed in the appropriate file.
 
 
 #### Blocks
 
-Each block should be placed into separate files. One block - one file.
+`blocks` folder contain page components. Each block should be placed into separate files. One block - one file.
 
 
 #### Helpers
+
+`Helpers` folder includes `mixins.sass`, `variables.sass`, `fonts.sass` and `base.sass` files.
 
 `misins.sass` - contains common mixins, i.e clearfix trick
 Mixins should be used to DRY up your code, add clarity, or abstract complexity--in much the same way as well-named functions. Mixins that accept no arguments can be useful for this, but note that if you are not compressing your payload (e.g. gzip), this may contribute to unnecessary code duplication in the resulting styles.
 
 Block-related mixins, like `button-hover-behavior()` should be placed into block file.
 
-`Helpers` folder includes `mixins.sass`, `variables.sass`, `fonts.sass` and `base.sass` files.
+`base.sass` contains common styles, like selection styles, `html` and `body` styles, headings defaults.
 
-`base.sass` contain common styles, like selection styles, `html` and `body` styles, headings defaults.
+`fonts.sass` contains local fonts imports
 
 
 #### Vendor libs
@@ -470,3 +476,4 @@ $block: ".block-name"
 ## Helpful Links
 * [BEM naming convention](https://en.bem.info/methodology/naming-convention/)
 * [BEM FAQ](https://en.bem.info/methodology/faq/)
+* [Architecture for a Sass Project](http://www.sitepoint.com/architecture-sass-project/)
