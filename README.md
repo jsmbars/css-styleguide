@@ -112,7 +112,7 @@ We use BEM for these reasons:
 * Information about the names of blocks, elements, and modifiers is stored using **CSS classes**.
 * Avoid nested selectors, like `.block-name h2 {}` or `.block-name__elem-name p {}`. Nested selectors increase code coupling and make reuse impossible. This is in contradiction to the BEM principles. In this case use `.block-name__title {}` element instead.
 
-**Exception:** nesting is appropriate if you need to change elements relative to the state of the block or the theme set: `.nav_theme_islands .nav__item {}`
+  **Exception:** nesting is appropriate if you need to change elements relative to the state of the block or the theme set: `.nav_theme_islands .nav__item {}`
 * Avoid combined tags and class names. Combining a tag and a class in a selector makes the CSS rules more specific.
 
 See [FAQ](https://en.bem.info/methodology/faq/) for more usage examples.
